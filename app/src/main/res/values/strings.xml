@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">Application Fitness</string>
+    <string-array name="nomes">
+        <item>João</item>
+        <item>Maria</item>
+        <item>Pedro</item>
+        <item>Ana</item>
+        <item>Lucas</item>
+        <item>Paula</item>
+        <item>José</item>
+        <item>Clara</item>
+        <item>Marcos</item>
+        <item>Julia</item>
+    </string-array>
+    <string-array name="generos">
+        <item>Masculino</item>
+        <item>Feminino</item>
+        <item>Masculino</item>
+        <item>Feminino</item>
+        <item>Masculino</item>
+        <item>Feminino</item>
+        <item>Masculino</item>
+        <item>Feminino</item>
+        <item>Masculino</item>
+        <item>Feminino</item>
+    </string-array>
+    <string-array name="metas">
+        <item>Perder peso</item>
+        <item>Ganho muscular</item>
+        <item>Manter forma</item>
+        <item>Perder peso</item>
+        <item>Ganho muscular</item>
+        <item>Manter forma</item>
+        <item>Perder peso</item>
+        <item>Ganho muscular</item>
+        <item>Manter forma</item>
+        <item>Perder peso</item>
+    </string-array>
+    <integer-array name="pesos">
+        <item>70</item>
+        <item>65</item>
+        <item>80</item>
+        <item>55</item>
+        <item>75</item>
+        <item>60</item>
+        <item>85</item>
+        <item>50</item>
+        <item>90</item>
+        <item>68</item>
+    </integer-array>
+</resources>

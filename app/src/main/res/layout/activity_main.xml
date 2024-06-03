@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:text="Cadastro de Usuário"
+
+            android:textColor="@color/design_default_color_secondary_variant"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:typeface="sans"
+            tools:ignore="MissingConstraints" />
+
+        <ScrollView
+            android:layout_width="410dp"
+            android:layout_height="500dp"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+                <TextView
+                    android:id="@+id/nomeLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:text="Nome"
+                    android:textColor="@color/design_default_color_secondary_variant"
+                    android:textStyle="bold"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/nomeInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:baselineAligned="false"
+                    android:ems="10"
+                    android:inputType="text" />
+
+                <RadioGroup
+                    android:id="@+id/generoRadio"
+                    android:layout_width="match_parent"
+                    android:layout_height="111dp">
+
+                    <TextView
+                        android:id="@+id/generoLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="37dp"
+                        android:text="Gênero"
+                        android:textColor="@color/design_default_color_secondary_variant"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/generoMasculino"
+                        android:layout_width="match_parent"
+                        android:layout_height="37dp"
+                        android:text="Masculino"
+                        tools:ignore="VisualLintButtonSize" />
+
+                    <RadioButton
+                        android:id="@+id/generoFeminino"
+                        android:layout_width="match_parent"
+                        android:layout_height="37dp"
+                        android:text="Feminino"
+                        tools:ignore="VisualLintButtonSize" />
+
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/metaLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="33dp"
+                    android:text="Meta"
+                    android:textColor="@color/design_default_color_secondary_variant"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/metaValue"
+                    android:layout_width="375dp"
+                    android:layout_height="48dp" />
+
+                <TextView
+                    android:id="@+id/diasTreinoLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="33dp"
+                    android:text="Dias da Semana para Treino"
+                    android:textColor="@color/design_default_color_secondary_variant"
+                    android:textStyle="bold" />
+
+                <CheckBox
+                    android:id="@+id/diaTreinoDomingo"
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:text="Domingo"
+                    android:textSize="12sp"
+                    tools:ignore="VisualLintButtonSize" />
+
+                <CheckBox
+                    android:id="@+id/diaTreinoSegunda"
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:text="Segunda"
+                    android:textSize="12sp"
+                    tools:ignore="VisualLintButtonSize" />
+
+                <CheckBox
+                    android:id="@+id/diaTreinoTerca"
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:text="Terça"
+                    android:textSize="12sp"
+                    tools:ignore="VisualLintButtonSize" />
+
+                <CheckBox
+                    android:id="@+id/diaTreinoQuarta"
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:text="Quarta"
+                    android:textSize="12sp"
+                    tools:ignore="VisualLintButtonSize" />
+
+                <CheckBox
+                    android:id="@+id/diaTreinoQuinta"
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:text="Quinta"
+                    android:textSize="12sp"
+                    tools:ignore="VisualLintButtonSize" />
+
+                <CheckBox
+                    android:id="@+id/diaTreinoSexta"
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:text="Sexta"
+                    android:textSize="12sp"
+                    tools:ignore="VisualLintButtonSize" />
+
+                <CheckBox
+                    android:id="@+id/diaTreinoSabado"
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:text="Sábado"
+                    android:textSize="12sp"
+                    tools:ignore="VisualLintButtonSize" />
+
+                <TextView
+                    android:id="@+id/pesoLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:text="Peso"
+                    android:textColor="@color/design_default_color_secondary_variant"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/peso"
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:digits="0123456789."
+                    android:ems="10"
+                    android:inputType="number"
+                    android:verticalScrollbarPosition="right" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <Button
+                android:id="@+id/limpar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Limpar"
+                android:textColor="@color/design_default_color_on_primary"
+                app:backgroundTint="@color/design_default_color_error"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:id="@+id/salvar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Salvar"
+                android:textColor="@color/design_default_color_on_primary"
+                android:textColorLink="@color/design_default_color_secondary_variant"
+                app:backgroundTint="@color/design_default_color_secondary_variant"
+                app:iconTint="@color/design_default_color_secondary_variant"
+                app:rippleColor="@color/design_default_color_secondary_variant"
+                app:strokeColor="@color/design_default_color_secondary_variant"
+                tools:ignore="MissingConstraints" />
+        </TableRow>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

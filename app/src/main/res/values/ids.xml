@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="nomeLabel" type="id" />
+    <item name="nomeInput" type="id" />
+    <item name="generoRadio" type="id" />
+    <item name="generoLabel" type="id" />
+    <item name="generoMasculino" type="id" />
+    <item name="generoFeminino" type="id" />
+    <item name="metaLabel" type="id" />
+    <item name="metaValue" type="id" />
+    <item name="diasTreinoLabel" type="id" />
+    <item name="diaTreinoDomingo" type="id" />
+    <item name="diaTreinoSegunda" type="id" />
+    <item name="diaTreinoTerca" type="id" />
+    <item name="diaTreinoQuarta" type="id" />
+    <item name="diaTreinoQuinta" type="id" />
+    <item name="diaTreinoSexta" type="id" />
+    <item name="diaTreinoSabado" type="id" />
+    <item name="pesoLabel" type="id" />
+    <item name="peso" type="id" />
+</resources>
