@@ -73,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void salvar() {
         String nome = mNomeInput.getText().toString();
-        int genero = mGeneroRadio.getCheckedRadioButtonId();
-        int meta = mMetaValue.getSelectedItemPosition();
+        String genero = mGeneroRadio.getCheckedRadioButtonId() == R.id.generoMasculino ? "Masculino" : "Feminino";
+        String meta = mMetaValue.getSelectedItem().toString();
         boolean diaTreinoDomingoValue = mDiaTreinoDomingo.isChecked();
         boolean diaTreinoSegundaValue = mDiaTreinoSegunda.isChecked();
         boolean diaTreinoTercaValue = mDiaTreinoTerca.isChecked();
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         boolean diaTreinoQuintaValue = mDiaTreinoQuinta.isChecked();
         boolean diaTreinoSextaValue = mDiaTreinoSexta.isChecked();
         boolean diaTreinoSabadoValue = mDiaTreinoSabado.isChecked();
-        String peso = mPesoInput.getText().toString();
+        float peso = mPesoInput.getText().toString().isEmpty() ? 0 : Float.parseFloat(mPesoInput.getText().toString());
 
         String mensagemValidacao = validarCampos();
         if (mensagemValidacao.isEmpty()) {
