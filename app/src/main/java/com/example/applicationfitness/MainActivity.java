@@ -83,25 +83,6 @@ public class MainActivity extends AppCompatActivity {
 
         mSalvar.setOnClickListener(v -> salvar());
         mLimpar.setOnClickListener(v -> limparCampos());
-
-        String[] nomes = getResources().getStringArray(R.array.nomes);
-        String[] generos = getResources().getStringArray(R.array.generos);
-        String[] metas = getResources().getStringArray(R.array.metas);
-        int[] pesos = getResources().getIntArray(R.array.pesos);
-
-        usuarios = new ArrayList<>();
-        for (int i = 0; i < nomes.length; i++) {
-            usuarios.add(new Usuario(nomes[i], generos[i], metas[i], true, true, true, true, true, true, true, pesos[i]));
-        }
-
-        ListView listView = findViewById(R.id.listView);
-        UsuarioAdapter adapterUsers = new UsuarioAdapter(this, usuarios);
-        listView.setAdapter(adapterUsers);
-
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-            Usuario usuario = usuarios.get(position);
-            Toast.makeText(MainActivity.this, "Clicou em: " + usuario.getNome(), Toast.LENGTH_SHORT).show();
-        });
     }
 
     public void salvar() {
