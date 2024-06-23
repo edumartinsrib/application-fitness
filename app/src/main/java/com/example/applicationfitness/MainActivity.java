@@ -1,6 +1,7 @@
 package com.example.applicationfitness;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -26,32 +27,18 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<Usuario> usuarios;
-
     private EditText mNomeInput;
-
     private Button mSalvar, mLimpar;
-
     private RadioGroup mGeneroRadio;
-
     private Spinner mMetaValue;
-
     private CheckBox mDiaTreinoDomingo, mDiaTreinoSegunda, mDiaTreinoTerca, mDiaTreinoQuarta,
             mDiaTreinoQuinta, mDiaTreinoSexta, mDiaTreinoSabado;
-
     private EditText mPesoInput;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        setContentView(R.layout.activity_main); // Certifique-se de que está apontando para o layout correto
 
         mNomeInput = findViewById(R.id.nomeInput);
         mGeneroRadio = findViewById(R.id.generoRadio);
@@ -67,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, metaValues);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mMetaValue.setAdapter(adapter);
-
 
         mDiaTreinoDomingo = findViewById(R.id.diaTreinoDomingo);
         mDiaTreinoSegunda = findViewById(R.id.diaTreinoSegunda);
@@ -97,10 +83,24 @@ public class MainActivity extends AppCompatActivity {
         boolean diaTreinoSextaValue = mDiaTreinoSexta.isChecked();
         boolean diaTreinoSabadoValue = mDiaTreinoSabado.isChecked();
         String peso = mPesoInput.getText().toString();
+
         String mensagemValidacao = validarCampos();
         if (mensagemValidacao.isEmpty()) {
-            Toast.makeText(this, "Salvo com sucesso!", Toast.LENGTH_SHORT).show();
-            mNomeInput.requestFocus();
+            Intent resultIntent = new Intent();
+            resultIntent.putExtra("nome", nome);
+            resultIntent.putExtra("genero", genero);
+            resultIntent.putExtra("meta", meta);
+            resultIntent.putExtra("diaTreinoDomingo", diaTreinoDomingoValue);
+            resultIntent.putExtra("diaTreinoSegunda", diaTreinoSegundaValue);
+            resultIntent.putExtra("diaTreinoTerca", diaTreinoTercaValue);
+            resultIntent.putExtra("diaTreinoQuarta", diaTreinoQuartaValue);
+            resultIntent.putExtra("diaTreinoQuinta", diaTreinoQuintaValue);
+            resultIntent.putExtra("diaTreinoSexta", diaTreinoSextaValue);
+            resultIntent.putExtra("diaTreinoSabado", diaTreinoSabadoValue);
+            resultIntent.putExtra("peso", peso);
+
+            setResult(RESULT_OK, resultIntent);
+            finish();
         } else {
             Toast.makeText(this, mensagemValidacao, Toast.LENGTH_SHORT).show();
         }
@@ -113,22 +113,17 @@ public class MainActivity extends AppCompatActivity {
             mensagemErro.append("Nome é obrigatório\n");
         }
         if (mGeneroRadio.getCheckedRadioButtonId() == -1) {
-            Toast.makeText(this, "Selecione o gênero", Toast.LENGTH_SHORT).show();
             mensagemErro.append("Gênero é obrigatório\n");
         }
         if (mMetaValue.getSelectedItemPosition() == 0) {
-            Toast.makeText(this, "Selecione a meta", Toast.LENGTH_SHORT).show();
             mensagemErro.append("Meta é obrigatória\n");
         }
         if (!mDiaTreinoDomingo.isChecked() && !mDiaTreinoSegunda.isChecked() && !mDiaTreinoTerca.isChecked()
                 && !mDiaTreinoQuarta.isChecked() && !mDiaTreinoQuinta.isChecked() && !mDiaTreinoSexta.isChecked()
                 && !mDiaTreinoSabado.isChecked()) {
-            Toast.makeText(this, "Selecione pelo menos um dia de treino", Toast.LENGTH_SHORT).show();
             mensagemErro.append("Dia de treino é obrigatório\n");
         }
-
         if (mPesoInput.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Preencha o peso", Toast.LENGTH_SHORT).show();
             mensagemErro.append("Peso é obrigatório\n");
         }
         return mensagemErro.toString();

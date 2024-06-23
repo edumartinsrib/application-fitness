@@ -46,9 +46,16 @@ public class ListActivity extends AppCompatActivity {
                         String nome = data.getStringExtra("nome");
                         String genero = data.getStringExtra("genero");
                         String meta = data.getStringExtra("meta");
-                        int peso = data.getIntExtra("peso", 0);
+                        boolean diaTreinoDomingo = data.getBooleanExtra("diaTreinoDomingo", false);
+                        boolean diaTreinoSegunda = data.getBooleanExtra("diaTreinoSegunda", false);
+                        boolean diaTreinoTerca = data.getBooleanExtra("diaTreinoTerca", false);
+                        boolean diaTreinoQuarta = data.getBooleanExtra("diaTreinoQuarta", false);
+                        boolean diaTreinoQuinta = data.getBooleanExtra("diaTreinoQuinta", false);
+                        boolean diaTreinoSexta = data.getBooleanExtra("diaTreinoSexta", false);
+                        boolean diaTreinoSabado = data.getBooleanExtra("diaTreinoSabado", false);
+                        float peso = data.getFloatExtra("peso", 0);
 
-                        Usuario novoUsuario = new Usuario(nome, genero, meta, true, true, true, true, true, true, true, peso);
+                        Usuario novoUsuario = new Usuario(nome, genero, meta, diaTreinoDomingo, diaTreinoSegunda, diaTreinoTerca, diaTreinoQuarta, diaTreinoQuinta, diaTreinoSexta, diaTreinoSabado, peso);
                         usuarios.add(novoUsuario);
                         adapter.notifyDataSetChanged();
                     }
