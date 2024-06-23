@@ -7,9 +7,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.applicationfitness.adapters.UsuarioAdapter;
@@ -21,7 +18,6 @@ import java.util.ArrayList;
 public class ListActivity extends AppCompatActivity {
     private ArrayList<Usuario> usuarios;
     private UsuarioAdapter adapter;
-    private ActivityResultLauncher<Intent> cadastroActivityResultLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,34 +34,10 @@ public class ListActivity extends AppCompatActivity {
             Toast.makeText(ListActivity.this, "Clicou em: " + usuario.getNome(), Toast.LENGTH_SHORT).show();
         });
 
-        cadastroActivityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                        Intent data = result.getData();
-                        String nome = data.getStringExtra("nome");
-                        String genero = data.getStringExtra("genero");
-                        String meta = data.getStringExtra("meta");
-                        boolean diaTreinoDomingo = data.getBooleanExtra("diaTreinoDomingo", false);
-                        boolean diaTreinoSegunda = data.getBooleanExtra("diaTreinoSegunda", false);
-                        boolean diaTreinoTerca = data.getBooleanExtra("diaTreinoTerca", false);
-                        boolean diaTreinoQuarta = data.getBooleanExtra("diaTreinoQuarta", false);
-                        boolean diaTreinoQuinta = data.getBooleanExtra("diaTreinoQuinta", false);
-                        boolean diaTreinoSexta = data.getBooleanExtra("diaTreinoSexta", false);
-                        boolean diaTreinoSabado = data.getBooleanExtra("diaTreinoSabado", false);
-                        float peso = data.getFloatExtra("peso", 0);
-
-                        Usuario novoUsuario = new Usuario(nome, genero, meta, diaTreinoDomingo, diaTreinoSegunda, diaTreinoTerca, diaTreinoQuarta, diaTreinoQuinta, diaTreinoSexta, diaTreinoSabado, peso);
-                        usuarios.add(novoUsuario);
-                        adapter.notifyDataSetChanged();
-                    }
-                }
-        );
-
         Button btnAdicionar = findViewById(R.id.btn_adicionar);
         btnAdicionar.setOnClickListener(v -> {
             Intent intent = new Intent(ListActivity.this, MainActivity.class);
-            cadastroActivityResultLauncher.launch(intent);
+            startActivityForResult(intent, 1);
         });
 
         Button btnSobre = findViewById(R.id.btn_sobre);
@@ -76,15 +48,22 @@ public class ListActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
             String nome = data.getStringExtra("nome");
             String genero = data.getStringExtra("genero");
             String meta = data.getStringExtra("meta");
-            int peso = data.getIntExtra("peso", 0);
+            boolean diaTreinoDomingo = data.getBooleanExtra("diaTreinoDomingo", false);
+            boolean diaTreinoSegunda = data.getBooleanExtra("diaTreinoSegunda", false);
+            boolean diaTreinoTerca = data.getBooleanExtra("diaTreinoTerca", false);
+            boolean diaTreinoQuarta = data.getBooleanExtra("diaTreinoQuarta", false);
+            boolean diaTreinoQuinta = data.getBooleanExtra("diaTreinoQuinta", false);
+            boolean diaTreinoSexta = data.getBooleanExtra("diaTreinoSexta", false);
+            boolean diaTreinoSabado = data.getBooleanExtra("diaTreinoSabado", false);
+            float peso = data.getFloatExtra("peso", 0);
 
-            Usuario novoUsuario = new Usuario(nome, genero, meta, true, true, true, true, true, true, true, peso);
+            Usuario novoUsuario = new Usuario(nome, genero, meta, diaTreinoDomingo, diaTreinoSegunda, diaTreinoTerca, diaTreinoQuarta, diaTreinoQuinta, diaTreinoSexta, diaTreinoSabado, peso);
             usuarios.add(novoUsuario);
             adapter.notifyDataSetChanged();
         }
