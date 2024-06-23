@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/logo_utfpr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_banner" />
+
+        <TextView
+            android:id="@+id/nome_aluno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome do Aluno: Eduardo Martins Ribeiro" />
+
+        <TextView
+            android:id="@+id/curso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Curso: Pós Graduação em Java" />
+
+        <TextView
+            android:id="@+id/campus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Universidade Federal do Paraná - Campus Cornélio Procópio" />
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email: edurib@alunos.utfpr.edu.br" />
+
+        <TextView
+            android:id="@+id/descricao_app"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descrição: Este aplicativo foi desenvolvido para a disciplina de Desenvolvimento de Aplicações Móveis. O Objetivo é criar um aplicativo que permita o cadastro de atividades físicas realizadas por um usuário." />
+" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
