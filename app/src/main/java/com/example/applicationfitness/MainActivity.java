@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main); // Certifique-se de que está apontando para o layout correto
+        setContentView(R.layout.activity_main);
 
         mNomeInput = findViewById(R.id.nomeInput);
         mGeneroRadio = findViewById(R.id.generoRadio);
