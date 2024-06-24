@@ -1,6 +1,8 @@
 package com.example.applicationfitness.entidades;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable {
     private String nome;
     private String genero;
     private String meta;

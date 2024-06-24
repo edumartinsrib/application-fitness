@@ -3,11 +3,16 @@ package com.example.applicationfitness;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.applicationfitness.adapters.UsuarioAdapter;
 import com.example.applicationfitness.entidades.Usuario;
@@ -18,6 +23,8 @@ import java.util.ArrayList;
 public class ListActivity extends AppCompatActivity {
     private ArrayList<Usuario> usuarios;
     private UsuarioAdapter adapter;
+    private int selectedPosition;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,22 +36,56 @@ public class ListActivity extends AppCompatActivity {
         adapter = new UsuarioAdapter(this, usuarios);
         listView.setAdapter(adapter);
 
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-            Usuario usuario = usuarios.get(position);
-            Toast.makeText(ListActivity.this, "Clicou em: " + usuario.getNome(), Toast.LENGTH_SHORT).show();
-        });
+        registerForContextMenu(listView);
 
-        Button btnAdicionar = findViewById(R.id.btn_adicionar);
-        btnAdicionar.setOnClickListener(v -> {
+        listView.setOnItemLongClickListener((parent, view, position, id) -> {
+            selectedPosition = position;
+            return false;
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_list, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.menu_adicionar) {
             Intent intent = new Intent(ListActivity.this, MainActivity.class);
             startActivityForResult(intent, 1);
-        });
+            return true;
+        } else if (id == R.id.menu_sobre) {
+            Intent intentSobre = new Intent(ListActivity.this, AutoriaActivity.class);
+            startActivity(intentSobre);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
-        Button btnSobre = findViewById(R.id.btn_sobre);
-        btnSobre.setOnClickListener(v -> {
-            Intent intent = new Intent(ListActivity.this, AutoriaActivity.class);
-            startActivity(intent);
-        });
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.context_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.context_editar) {
+            Usuario usuario = usuarios.get(selectedPosition);
+            Intent intent = new Intent(ListActivity.this, MainActivity.class);
+            intent.putExtra("usuario", usuario);
+            startActivityForResult(intent, 2);
+            return true;
+        } else if (id == R.id.context_excluir) {
+            usuarios.remove(selectedPosition);
+            adapter.notifyDataSetChanged();
+            return true;
+        }
+        return super.onContextItemSelected(item);
     }
 
     @Override

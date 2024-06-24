@@ -3,6 +3,8 @@ package com.example.applicationfitness;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -35,6 +37,14 @@ public class MainActivity extends AppCompatActivity {
             mDiaTreinoQuinta, mDiaTreinoSexta, mDiaTreinoSabado;
     private EditText mPesoInput;
 
+    private boolean modoEdicao = false;
+    private Usuario usuarioEditado;
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.context_menu, menu);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +73,12 @@ public class MainActivity extends AppCompatActivity {
         mDiaTreinoSexta = findViewById(R.id.diaTreinoSexta);
         mDiaTreinoSabado = findViewById(R.id.diaTreinoSabado);
         mPesoInput = findViewById(R.id.peso);
+
+        if (getIntent().hasExtra("usuario")) {
+            modoEdicao = true;
+            usuarioEditado = (Usuario) getIntent().getSerializableExtra("usuario");
+            preencherCamposEdicao();
+        }
 
         mSalvar = findViewById(R.id.salvar);
         mLimpar = findViewById(R.id.limpar);
@@ -129,6 +145,24 @@ public class MainActivity extends AppCompatActivity {
         return mensagemErro.toString();
     }
 
+    private void preencherCamposEdicao() {
+        mNomeInput.setText(usuarioEditado.getNome());
+        if (usuarioEditado.getGenero().equals("Masculino")) {
+            mGeneroRadio.check(R.id.generoMasculino);
+        } else {
+            mGeneroRadio.check(R.id.generoFeminino);
+        }
+        mMetaValue.setSelection(((ArrayAdapter<String>) mMetaValue.getAdapter()).getPosition(usuarioEditado.getMeta()));
+        mDiaTreinoDomingo.setChecked(usuarioEditado.isDiaTreinoDomingo());
+        mDiaTreinoSegunda.setChecked(usuarioEditado.isDiaTreinoSegunda());
+        mDiaTreinoTerca.setChecked(usuarioEditado.isDiaTreinoTerca());
+        mDiaTreinoQuarta.setChecked(usuarioEditado.isDiaTreinoQuarta());
+        mDiaTreinoQuinta.setChecked(usuarioEditado.isDiaTreinoQuinta());
+        mDiaTreinoSexta.setChecked(usuarioEditado.isDiaTreinoSexta());
+        mDiaTreinoSabado.setChecked(usuarioEditado.isDiaTreinoSabado());
+        mPesoInput.setText(String.valueOf(usuarioEditado.getPeso()));
+    }
+
     public void limparCampos() {
         mNomeInput.setText("");
         mGeneroRadio.clearCheck();
@@ -142,5 +176,10 @@ public class MainActivity extends AppCompatActivity {
         mDiaTreinoSabado.setChecked(false);
         mPesoInput.setText("");
         Toast.makeText(this, "Limpo", Toast.LENGTH_SHORT).show();
+    }
+
+    private void cancelarEdicao() {
+        setResult(RESULT_CANCELED);
+        finish();
     }
 }
